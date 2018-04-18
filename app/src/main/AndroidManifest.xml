@@ -18,6 +18,10 @@
         </activity>
         <activity android:name=".ui.ObservableFieldActivity">
         </activity>
+        <activity android:name=".ui.ViewModelActivity">
+        </activity>
+        <activity android:name=".ui.TwoWayActivity">
+        </activity>
     </application>
 
 </manifest>

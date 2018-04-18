@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.TwoWayActivity">
+
+    <data>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/setsDecrease"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/minus_sign"
+            app:layout_constraintBottom_toTopOf="@+id/displayWorkTimeLeft"
+            app:layout_constraintEnd_toStartOf="@+id/numberOfSets"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/numberOfSets"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/setsIncrease"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/setsDecrease"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Setts: 1/8"/>
+
+        <Button
+            android:id="@+id/setsIncrease"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/plus_sign"
+            app:layout_constraintEnd_toStartOf="@+id/stop"
+            app:layout_constraintStart_toEndOf="@+id/numberOfSets"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/stop"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toStartOf="@+id/startPause"
+            app:layout_constraintStart_toEndOf="@+id/setsIncrease"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ToggleButton
+            android:id="@+id/startPause"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:focusable="true"
+            android:textAllCaps="false"
+            android:textOff="@string/start"
+            android:textOn="@string/pause"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/stop"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/displayWorkTimeLeft"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryDarkColor"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/workminus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setsDecrease"
+            app:layout_constraintVertical_bias="0"
+            tools:text="14:40"/>
+
+        <Button
+            android:id="@+id/workminus"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/minus_sign"
+            app:layout_constraintBottom_toTopOf="@+id/workoutBar"
+            app:layout_constraintEnd_toStartOf="@+id/setWorkTime"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/displayWorkTimeLeft"/>
+
+        <EditText
+            android:id="@+id/setWorkTime"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/workplus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/workminus"
+            app:layout_constraintTop_toBottomOf="@+id/displayWorkTimeLeft"
+            tools:text="1/8"/>
+
+        <Button
+            android:id="@+id/workplus"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/plus_sign"
+            app:layout_constraintStart_toEndOf="@+id/setWorkTime"
+            app:layout_constraintTop_toBottomOf="@+id/displayWorkTimeLeft"/>
+
+        <ProgressBar
+            android:id="@+id/workoutBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/displayRestTimeLeft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/workminus"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/displayRestTimeLeft"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryDarkColor"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/restminus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/workoutBar"
+            app:layout_constraintVertical_bias="0"
+            tools:text="14:40"/>
+
+        <Button
+            android:id="@+id/restminus"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/minus_sign"
+            app:layout_constraintBottom_toTopOf="@+id/restBar"
+            app:layout_constraintEnd_toStartOf="@+id/setRestTime"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/displayRestTimeLeft"/>
+
+        <EditText
+            android:id="@+id/setRestTime"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/restplus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/restminus"
+            app:layout_constraintTop_toBottomOf="@+id/displayRestTimeLeft"
+            tools:text="1/8"/>
+
+        <Button
+            android:id="@+id/restplus"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/plus_sign"
+            app:layout_constraintStart_toEndOf="@+id/setRestTime"
+            app:layout_constraintTop_toBottomOf="@+id/displayRestTimeLeft"/>
+
+        <ProgressBar
+            android:id="@+id/restBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restminus"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
+

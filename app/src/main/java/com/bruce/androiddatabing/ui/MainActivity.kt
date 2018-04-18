@@ -18,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.viewmodelActivityButton.setOnClickListener {
-
+            startActivity(Intent(this, ViewModelActivity::class.java))
+        }
+        binding.twoWayActivityButton.setOnClickListener {
+            startActivity(Intent(this, TwoWayActivity::class.java))
         }
     }
 }

@@ -11,5 +11,13 @@
     <string name="like">Like</string>
     <string name="observable_fields_activity_text">Observable Fields activity</string>
     <string name="viewmodel_activity_text">ViewModel activity</string>
+    <string name="twoWay_activity_text">twoWay activity</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Reset</string>
+    <string name="pause">Pause</string>
+    <string name="minus_sign">-</string>
+    <string name="plus_sign">+</string>
+    <string name="sets_format">Sets: %d/%d</string>
 
 </resources>
