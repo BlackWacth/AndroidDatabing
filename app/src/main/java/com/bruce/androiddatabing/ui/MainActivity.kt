@@ -1,11 +1,11 @@
-package com.bruce.androiddatabing
+package com.bruce.androiddatabing.ui
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.bruce.androiddatabing.R
 import com.bruce.androiddatabing.databinding.ActivityMainBinding
-import com.bruce.androiddatabing.ui.ObservableFieldActivity
 
 class MainActivity : AppCompatActivity() {
 
