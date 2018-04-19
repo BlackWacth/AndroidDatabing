@@ -7,11 +7,20 @@
 
     <data>
 
+        <import type="com.bruce.androiddatabing.util.ConverterKt"/>
+        <import type="com.bruce.androiddatabing.util.NumberOfSetsConverters"/>
+
+        <variable
+            name="timerViewModel"
+            type="com.bruce.androiddatabing.data.IntervalTimerViewModel"/>
+
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <Button
             android:id="@+id/setsDecrease"
@@ -20,6 +29,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/minus_sign"
+            android:onClick="@{() -> timerViewModel.setsDecrease()}"
             app:layout_constraintBottom_toTopOf="@+id/displayWorkTimeLeft"
             app:layout_constraintEnd_toStartOf="@+id/numberOfSets"
             app:layout_constraintHorizontal_bias="0.5"
@@ -39,6 +49,11 @@
             android:inputType="number"
             android:textAlignment="center"
             android:textSize="16sp"
+            android:enabled="@{!timerViewModel.timerRunning}"
+            clearTextOnFocus="@{true}"
+            numberOfSets="@{NumberOfSetsConverters.setArrayToString(context, timerViewModel.numberOfSets)}"
+            loseFocusWhen="@{timerViewModel.timerRunning}"
+            hideKeyboardOnInputDone="@{true}"
             app:layout_constraintEnd_toStartOf="@+id/setsIncrease"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/setsDecrease"
@@ -52,6 +67,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/plus_sign"
+            android:onClick="@{() -> timerViewModel.setsIncrease()}"
             app:layout_constraintEnd_toStartOf="@+id/stop"
             app:layout_constraintStart_toEndOf="@+id/numberOfSets"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -64,6 +80,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/stop"
             android:textAllCaps="false"
+            android:onClick="@{() -> timerViewModel.stopButtonClicked()}"
             app:layout_constraintEnd_toStartOf="@+id/startPause"
             app:layout_constraintStart_toEndOf="@+id/setsIncrease"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -78,6 +95,7 @@
             android:textAllCaps="false"
             android:textOff="@string/start"
             android:textOn="@string/pause"
+            android:checked="@{timerViewModel.timerRunning}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/stop"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -92,6 +110,9 @@
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/secondaryDarkColor"
+            android:text="@{ConverterKt.fromTenthsToSeconds(timerViewModel.workTimeLeft)}"
+            animateBackground="@{timerViewModel.timerRunning}"
+            animateBackgroundStage="@{timerViewModel.inWorkingStage}"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/workminus"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +128,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/minus_sign"
+            android:onClick="@{() -> timerViewModel.workTimeDecrease()}"
             app:layout_constraintBottom_toTopOf="@+id/workoutBar"
             app:layout_constraintEnd_toStartOf="@+id/setWorkTime"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -125,6 +147,10 @@
             android:inputType="number"
             android:textAlignment="center"
             android:textSize="16sp"
+            android:text="@{ConverterKt.fromTenthsToSeconds(timerViewModel.timePerWorkSet)}"
+            loseFocusWhen="@{timerViewModel.timerRunning}"
+            clearOnFocusAndDispatch="@{() -> timerViewModel.timePerWorkSetChanged(setWorkTime.getText())}"
+            hideKeyboardOnInputDone="@{true}"
             app:layout_constraintEnd_toStartOf="@+id/workplus"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/workminus"
@@ -138,6 +164,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/plus_sign"
+            android:onClick="@{() -> timerViewModel.workTimeIncrease()}"
             app:layout_constraintStart_toEndOf="@+id/setWorkTime"
             app:layout_constraintTop_toBottomOf="@+id/displayWorkTimeLeft"/>
 
@@ -147,6 +174,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:max="@{timerViewModel.timePerWorkSet}"
+            android:progress="@{timerViewModel.workTimeLeft}"
+            animateVerticalBias="@{timerViewModel.timerRunning}"
+            animateVerticalBiasStage="@{timerViewModel.inWorkingStage}"
             app:layout_constraintBottom_toTopOf="@+id/displayRestTimeLeft"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +193,9 @@
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/secondaryDarkColor"
+            android:text="@{ConverterKt.fromTenthsToSeconds(timerViewModel.resetTimeLeft)}"
+            animateBackground="@{timerViewModel.timerRunning}"
+            animateBackgroundStage="@{!timerViewModel.inWorkingStage}"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/restminus"
             app:layout_constraintEnd_toEndOf="parent"
@@ -177,6 +211,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/minus_sign"
+            android:onClick="@{() -> timerViewModel.resetTimeDecrease()}"
             app:layout_constraintBottom_toTopOf="@+id/restBar"
             app:layout_constraintEnd_toStartOf="@+id/setRestTime"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -195,6 +230,10 @@
             android:inputType="number"
             android:textAlignment="center"
             android:textSize="16sp"
+            android:text="@{ConverterKt.fromTenthsToSeconds(timerViewModel.timePerRestSet)}"
+            clearOnFocusAndDispatch="@{() -> timerViewModel.timePerRestSetChanged(setRestTime.getText())}"
+            loseFocusWhen="@{timerViewModel.timerRunning}"
+            hideKeyboardOnInputDone="@{true}"
             app:layout_constraintEnd_toStartOf="@+id/restplus"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/restminus"
@@ -208,6 +247,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:text="@string/plus_sign"
+            android:onClick="@{() -> timerViewModel.resetTimeIncrease()}"
             app:layout_constraintStart_toEndOf="@+id/setRestTime"
             app:layout_constraintTop_toBottomOf="@+id/displayRestTimeLeft"/>
 
@@ -217,6 +257,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:max="@{timerViewModel.timePerRestSet}"
+            android:progress="@{timerViewModel.resetTimeLeft}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
